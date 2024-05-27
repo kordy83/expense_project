@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">view_task_form2_inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <group string="Task Revenue">
+                        <field name="pay_state" widget="radio"/>
+                        <field name="states" widget="radio"/>
+                    </group>
+                    <group string="Task Expenses">
+                        <field name="expenses_label" widget="radio"/>
+                        <field name="task_expenses" widget="radio"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//header//button[@name='action_assign_to_me']" position="before">
+                    <button string="New Sale Order" name="action_create_sale_order" type="object"
+                            icon="fa-dollar"
+                            class="btn-primary"
+                    />
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_sale_project_inherit_form_inherited" model="ir.ui.view">
+            <field name="name">project.task.form.inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="sale_project.view_sale_project_inherit_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_line_id' and @readonly='0']" position="after">
+                    <field name="product_id"/>
+                    <field name="product_quantity"/>
+                </xpath>
+
+                <xpath expr="//span[@id='start_rating_buttons']" position="before">
+                    <button string="Add Product" type="object" name="add_product_to_sale_order"
+                        class="oe_stat_button"
+                        icon="fa-plus"
+                    />
+                </xpath>
+
+            </field>
+        </record>
+    
+    </data>
+</odoo>

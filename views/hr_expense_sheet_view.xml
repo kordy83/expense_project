@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_hr_expense_sheet_form_inherit" model="ir.ui.view">
+            <field name="name">view_hr_expense_sheet_form_inherit</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook//page//field[@name='expense_line_ids']" position="attributes">
+                    <attribute name="widget">one2many</attribute>
+                </xpath>
+                <xpath expr="//notebook//page//field[@name='expense_line_ids']//tree//field[@name='name']" position="after">
+				     <field name="payment_mode" optional="show"/>
+                    <field name="project_id" optional="show"/>
+                    <field name="task_id" optional="show" attrs="{'invisible': [('project_id', '=', False)]}"/>
+                    <field name="task_expense_sponsor" optional="show"/>
+                    <field name="task_expenses_label" optional="show"/>
+                    <field name="partner_id" optional="show"/>
+                    <field name="task_sale_line_id_order_id" invisible="1"/>
+                </xpath>
+<!--                <xpath expr="//notebook//page//field[@name='expense_line_ids']//tree//field[@name='sale_order_id']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('partner_id', '=', False), ('can_be_reinvoiced', '=', False)]}</attribute>-->
+<!--                    <attribute name="domain">[('state', '=', 'sale'), ('company_id', '=', company_id), ('partner_id', '=', partner_id), ('id', '=', task_sale_line_id_order_id)]</attribute>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+    
+    </data>
+</odoo>
